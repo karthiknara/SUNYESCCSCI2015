@@ -28,9 +28,9 @@ public class Simulator
     private static final double GRASS_CREATION_PROBABILITY = .50;
 
     // List of animals in the field.
-    private List<Animal> animals;
+    private ArrayList<Animal> animals;
     // List of plants in the field.
-    private List<ArrayList> plants;
+    private ArrayList<ArrayList> plants;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -66,9 +66,9 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Deer.class, Color.BLACK);
-        view.setColor(Grass.class, Color.GREEN);
-        view.setColor(Tree.class, Color.ORANGE);
+        view.setAnimalColor(Deer.class, Color.BLACK);
+        view.setPlantColor(Grass.class, Color.GREEN);
+        view.setPlantColor(Tree.class, Color.ORANGE);
         
         // Setup a valid starting point.
         reset();

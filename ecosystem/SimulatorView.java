@@ -42,7 +42,7 @@ public class SimulatorView extends JFrame
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
 
-        setTitle("Fox and Rabbit Simulation");
+        setTitle("Deer and Vegetation Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
@@ -63,17 +63,42 @@ public class SimulatorView extends JFrame
      * @param animalClass The animal's Class object.
      * @param color The color to be used for the given class.
      */
-    public void setColor(Class animalClass, Color color)
+    public void setAnimalColor(Class animalClass, Color color)
     {
         colors.put(animalClass, color);
+    }
+    
+    /**
+     * Define a color to be used for a given class of plant.
+     * @param plantClass The plant's Class object.
+     * @param color The color to be used for the given class.
+     */
+    public void setPlantColor(Class plantClass, Color color)
+    {
+        colors.put(plantClass, color);
     }
 
     /**
      * @return The color to be used for a given class of animal.
      */
-    private Color getColor(Class animalClass)
+    private Color getAnimalColor(Class animalClass)
     {
         Color col = colors.get(animalClass);
+        if(col == null) {
+            // no color defined for this class
+            return UNKNOWN_COLOR;
+        }
+        else {
+            return col;
+        }
+    }
+    
+    /**
+     * @return The color to be used for a given class of animal.
+     */
+    private Color getPlantColor(Class plantClass)
+    {
+        Color col = colors.get(plantClass);
         if(col == null) {
             // no color defined for this class
             return UNKNOWN_COLOR;
@@ -102,9 +127,14 @@ public class SimulatorView extends JFrame
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
+                Object plant = field.getMainPlantAt(row, col);
                 if(animal != null) {
                     stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    fieldView.drawMark(col, row, getAnimalColor(animal.getClass()));
+                }
+                else if(plant != null) {
+                    stats.incrementCount(plant.getClass());
+                    fieldView.drawMark(col, row, getPlantColor(plant.getClass()));
                 }
                 else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);

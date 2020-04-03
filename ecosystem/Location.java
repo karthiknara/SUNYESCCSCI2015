@@ -100,6 +100,25 @@ public class Location
     }
     
     /**
+     * Find the main plant in a location. Trees overshadow grass.
+     * Used to determine the color of the square.
+     * 
+     * @return The class of the dominant plant
+     */
+    public Class mainPlant()
+    {
+       
+       for(Plant plant : plantsInSquare) {
+          if(plant instanceof Tree) {
+              return getClass();
+          }else if(plant instanceof Grass) {
+              return getClass();
+          }
+       } 
+       return null; 
+    }
+    
+    /**
      * Add plant to ArrayList at location.
      * 
      * @return Updated ArrayList

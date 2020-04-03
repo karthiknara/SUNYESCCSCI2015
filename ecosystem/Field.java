@@ -135,6 +135,7 @@ public class Field
         return location.getPlants();
     }
     
+        
     /**
      * Return the animal at the given location, if any.
      * @param row The desired row.
@@ -144,6 +145,18 @@ public class Field
     public Object getObjectAt(int row, int col)
     {
         return field[row][col];
+    }
+    
+    /**
+     * Return the animal at the given location, if any.
+     * @param row The desired row.
+     * @param col The desired column.
+     * @return The animal at the given location, or null if there is none.
+     */
+    public Object getMainPlantAt(int row, int col)
+    {
+        Location loc = new Location(row, col);
+        return loc.mainPlant();        
     }
     
     /**
