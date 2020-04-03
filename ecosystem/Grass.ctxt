@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Grass
 comment0.text=\r\n\ A\ simple\ model\ of\ grass.\r\n\ Grass\ spreads,\ never\ ages,\ is\ eaten\ by\ deer,\ and\ has\ a\ 75%\ chance\r\n\ of\ dying\ if\ a\ fire\ comes.\r\n\ \r\n\ @author\ Rebecca\ McCranie\r\n\ \ \ \ \ \ \ \ \ (adapted\ from\ Foxes\ and\ Rabbits\ \r\n\ \ \ \ \ \ \ \ \ by\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling,\ 2016.02.29\ (2))\r\n\ @version\ 2020.04.01\r\n
-comment1.params=field\ location
-comment1.target=Grass(Field,\ Location)
+comment1.params=alive\ field\ location
+comment1.target=Grass(boolean,\ Field,\ Location)
 comment1.text=\r\n\ Create\ grass\ in\ one\ square.\ \r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment2.params=newPlants
 comment2.target=void\ act(java.util.List)

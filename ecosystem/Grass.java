@@ -33,9 +33,9 @@ public class Grass extends Plant
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Grass(Field field, Location location)
+    public Grass(boolean alive, Field field, Location location)
     {
-        super(field, location);
+        super(alive, field, location);
         age = 0;
     }
     
@@ -52,7 +52,7 @@ public class Grass extends Plant
         Location newLocation = getField().locationsWithSpaceForGrass(getLocation());
         if(isAlive() && canSpread() && newLocation != null) {
             spread(newPlants); 
-            Grass newGrass = new Grass(getField(),newLocation);
+            Grass newGrass = new Grass(true, getField(),newLocation);
             setLocation(newGrass, newLocation);
         }
         else {
@@ -79,7 +79,7 @@ public class Grass extends Plant
         // Get a list of adjacent locations with space for grass.
         Field field = getField();
         Location loc = field.locationsWithSpaceForGrass(getLocation());
-        Grass young = new Grass(field, loc);
+        Grass young = new Grass(true, field, loc);
         newPlants.add(young);
     }
     

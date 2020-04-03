@@ -23,7 +23,7 @@ public abstract class Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Animal(Field field, Location location)
+    public Animal(boolean alive, Field field, Location location)
     {
         alive = true;
         this.field = field;

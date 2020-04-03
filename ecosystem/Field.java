@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Represent a rectangular grid of field positions.
- * Each position is able to store a single animal.
+ * Each position is able to store a single animal and an array of plants.
  * 
  * @author Rebecca McCranie
  *         (adapted from Foxes and Rabbits 
@@ -360,7 +360,7 @@ public class Field
                 if(plant instanceof Grass) {
                     Field field = plant.getField();
                     plant.setDead();
-                    Tree seedling = new Tree(field, loc);
+                    Tree seedling = new Tree(true, field, loc);
                     placePlant(seedling, loc);
                     replace = false;
                 }

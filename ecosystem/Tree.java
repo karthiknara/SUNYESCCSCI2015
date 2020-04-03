@@ -35,9 +35,9 @@ public class Tree extends Plant
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Tree(Field field, Location location)
+    public Tree(boolean alive, Field field, Location location)
     {
-        super(field, location);
+        super(alive, field, location);
         age = 0;
     }
     
@@ -55,7 +55,7 @@ public class Tree extends Plant
         
         if(isAlive() && canSpread() && newLocation != null) {
             spread(newTrees);   
-            Tree newTree = new Tree(getField(),newLocation);
+            Tree newTree = new Tree(true, getField(),newLocation);
             setLocation(newTree, newLocation);
         }
         else {
@@ -91,7 +91,7 @@ public class Tree extends Plant
         // Get a list of adjacent locations with space for trees.
         Field field = getField();
         Location loc = field.locationsWithSpaceForTrees(getLocation());
-        Tree seedling = new Tree(field, loc);
+        Tree seedling = new Tree(true, field, loc);
         List<Plant> currantPlantList = field.getPlantsAt(loc);
         if(currantPlantList.size() < MAX_PLANTS) {
             field.placePlant(seedling, loc);

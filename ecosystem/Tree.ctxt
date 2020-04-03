@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Tree
 comment0.text=\r\n\ A\ simple\ model\ of\ a\ tree.\r\n\ Trees\ age,\ reproduce,\ and\ have\ a\ 60%\ chance\ of\ dying\ if\ they\r\n\ encounter\ fire.\r\n\ \r\n\ @author\ Rebecca\ McCranie\r\n\ \ \ \ \ \ \ \ \ (adapted\ from\ Foxes\ and\ Rabbits\ \r\n\ \ \ \ \ \ \ \ \ by\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling,\ 2016.02.29\ (2))\r\n\ @version\ 2020.04.01\r\n
-comment1.params=field\ location
-comment1.target=Tree(Field,\ Location)
+comment1.params=alive\ field\ location
+comment1.target=Tree(boolean,\ Field,\ Location)
 comment1.text=\r\n\ Create\ a\ tree.\ \r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment2.params=newTrees
 comment2.target=void\ act(java.util.List)

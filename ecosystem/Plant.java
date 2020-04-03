@@ -26,7 +26,7 @@ public abstract class Plant
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Plant(Field field, Location location)
+    public Plant(boolean alive, Field field, Location location)
     {
         alive = true;
         this.field = field;

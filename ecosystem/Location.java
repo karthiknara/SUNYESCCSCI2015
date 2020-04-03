@@ -23,6 +23,7 @@ public class Location
     {
         this.row = row;
         this.col = col;
+        plantsInSquare = new ArrayList<>();
     }
     
     /**
@@ -96,5 +97,15 @@ public class Location
             }
         }
         return plantsInSquare;
+    }
+    
+    /**
+     * Add plant to ArrayList at location.
+     * 
+     * @return Updated ArrayList
+     */
+    public void addPlant(Plant plant)
+    {
+        plantsInSquare.add(plant);
     }
 }

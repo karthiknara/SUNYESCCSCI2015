@@ -30,7 +30,7 @@ public class Simulator
     // List of animals in the field.
     private List<Animal> animals;
     // List of plants in the field.
-    private List<Plant> plants;
+    private List<ArrayList> plants;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -117,17 +117,20 @@ public class Simulator
             }
         }
         
-        for(Iterator<Plant> it = plants.iterator(); it.hasNext(); ) {
-            Plant plant = it.next();
-            plant.act(newPlants);
-            if(! plant.isAlive()) {
-                it.remove();
-            }
+        for(Iterator<ArrayList> it = plants.iterator(); it.hasNext(); ) {
+            ArrayList<Plant> plantsInSquare = it.next();
+            for(Plant plant : plantsInSquare) {
+                plant.act(newPlants);
+                if(! plant.isAlive()) {
+                    plantsInSquare.remove(plant);
+                }
+            } 
+            plantsInSquare.addAll(newPlants);
         }
-               
+                        
         // Add the newly born deer and new plants to the main lists.
         animals.addAll(newAnimals);
-        plants.addAll(newPlants);
+        
 
         view.showStatus(step, field);
     }
@@ -158,19 +161,19 @@ public class Simulator
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Deer deer = new Deer(field, location);
+                    Deer deer = new Deer(true, field, location);
                     animals.add(deer);
                 }
                 else if(rand.nextDouble() <= TREE_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Tree tree = new Tree(field, location);
-                    plants.add(tree);
+                    Tree tree = new Tree(true, field, location);
+                    location.addPlant(tree);
                 }
                 else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Grass grass = new Grass(field, location);
-                    plants.add(grass);
-                // else leave the location empty.
+                    Grass grass = new Grass(true, field, location);
+                    location.addPlant(grass);
+                    // else leave the location empty.
             }
         }
         }

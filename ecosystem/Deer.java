@@ -40,9 +40,9 @@ public class Deer extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Deer(Field field, Location location)
+    public Deer(boolean alive, Field field, Location location)
     {
-        super(field, location);
+        super(alive, field, location);
         healthLevel = 8;
         age = 0;
     }
@@ -135,7 +135,7 @@ public class Deer extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Deer young = new Deer(field, loc);
+            Deer young = new Deer(true, field, loc);
             newDeers.add(young);
         }
     }

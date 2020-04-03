@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Deer
 comment0.text=\r\n\ A\ simple\ model\ of\ a\ deer.\r\n\ Deer\ age,\ move,\ eat\ grass,\ reproduce,\ and\ die.\r\n\ \r\n\ @author\ Rebecca\ McCranie\r\n\ \ \ \ \ \ \ \ \ (adapted\ from\ Foxes\ and\ Rabbits\ \r\n\ \ \ \ \ \ \ \ \ by\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling,\ 2016.02.29\ (2))\r\n\ @version\ 2020.04.01\r\n
-comment1.params=field\ location
-comment1.target=Deer(Field,\ Location)
+comment1.params=alive\ field\ location
+comment1.target=Deer(boolean,\ Field,\ Location)
 comment1.text=\r\n\ Create\ a\ deer.\ Deer\ have\ 8\ health\ points\ and\ are\ 0\ years\ old\ at\ \r\n\ creation.\r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment2.params=newDeers
 comment2.target=void\ act(java.util.List)
