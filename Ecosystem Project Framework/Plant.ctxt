@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Plant
+comment0.text=\r\n\ A\ simple\ model\ of\ a\ plant.\r\n\ Plants\ age,\ move,\ breed,\ and\ die.\r\n\ \r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\ (2)\r\n
+comment1.params=field\ location
+comment1.target=Plant(Field,\ Location)
+comment1.text=\r\n\ Create\ a\ new\ plant.\ A\ plant\ may\ be\ created\ with\ age\r\n\ zero\ or\ with\ a\ random\ age.\r\n\ \r\n\ @param\ randomAge\ If\ true,\ the\ plant\ will\ have\ a\ random\ age.\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
+comment2.params=newPlants
+comment2.target=void\ act(java.util.List)
+comment2.text=\r\n\ This\ is\ what\ the\ plant\ does\ most\ of\ the\ time\ -\ it\ runs\ \r\n\ around.\ Sometimes\ it\ will\ breed\ or\ die\ of\ old\ age.\r\n\ @param\ newPlants\ A\ list\ to\ return\ newly\ born\ plants.\r\n
+comment3.params=newPlants
+comment3.target=void\ giveBirth(java.util.List)
+comment3.text=\r\n\ Check\ whether\ or\ not\ this\ plant\ is\ to\ give\ birth\ at\ this\ step.\r\n\ New\ births\ will\ be\ made\ into\ free\ adjacent\ locations.\r\n\ @param\ newPlants\ A\ list\ to\ return\ newly\ born\ plants.\r\n
+numComments=4
