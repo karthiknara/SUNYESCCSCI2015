@@ -33,10 +33,24 @@ public class Grass extends Plant
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Grass(boolean alive, Field field, Location location)
+    public Grass(boolean randomAge, Field field, Location location)
     {
-        super(alive, field, location);
+        super(field, location);
         age = 0;
+        if(randomAge) {
+            age = rand.nextInt();
+        }
+    }
+    
+    /**
+     * Return the grass plant's age. Plants don't die of old age, but age 
+     * determines when plants can reproduce.
+     * @return The age of the grass.
+     */
+    private int incrementAge()
+    {
+        age++;
+        return age;
     }
     
     /**
@@ -49,16 +63,30 @@ public class Grass extends Plant
      */
     public void act(List<Plant> newPlants)
     {
+        incrementAge();
         Location newLocation = getField().locationsWithSpaceForGrass(getLocation());
         if(isAlive() && canSpread() && newLocation != null) {
             spread(newPlants); 
-            Grass newGrass = new Grass(true, getField(),newLocation);
-            setLocation(newGrass, newLocation);
+            Grass newGrass = new Grass(false, getField(),newLocation);
         }
-        else {
-            // Overcrowding.
+        
+    }
+    
+    /**
+     * Add a grass plant into the List for plants at the location.
+     * 
+     * @param location The location within the field.
+     */
+    public ArrayList<Plant> setLocation(Location location)
+    {
+        ArrayList<Plant> plantsCurrantLocation = location.getPlants();
+        Plant plant = new Grass(false, getField(), location);
+        if(plantsCurrantLocation.size() < 10) {
+            plantsCurrantLocation.add(plant);
+        } else {
             setDead();
         }
+        return plantsCurrantLocation;
     }
     
     /**

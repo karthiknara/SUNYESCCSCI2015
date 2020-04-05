@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Deer
 comment0.text=\r\n\ A\ simple\ model\ of\ a\ deer.\r\n\ Deer\ age,\ move,\ eat\ grass,\ reproduce,\ and\ die.\r\n\ \r\n\ @author\ Rebecca\ McCranie\r\n\ \ \ \ \ \ \ \ \ (adapted\ from\ Foxes\ and\ Rabbits\ \r\n\ \ \ \ \ \ \ \ \ by\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling,\ 2016.02.29\ (2))\r\n\ @version\ 2020.04.01\r\n
-comment1.params=alive\ field\ location
+comment1.params=randomAge\ field\ location
 comment1.target=Deer(boolean,\ Field,\ Location)
 comment1.text=\r\n\ Create\ a\ deer.\ Deer\ have\ 8\ health\ points\ and\ are\ 0\ years\ old\ at\ \r\n\ creation.\r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment2.params=newDeers
@@ -24,5 +24,5 @@ comment7.target=int\ breed()
 comment7.text=\r\n\ Generate\ a\ number\ representing\ the\ number\ of\ births,\r\n\ if\ it\ can\ breed.\r\n\ @return\ The\ number\ of\ births\ (may\ be\ zero).\r\n
 comment8.params=
 comment8.target=boolean\ canBreed()
-comment8.text=\r\n\ A\ deer\ can\ breed\ if\ it\ has\ reached\ the\ breeding\ age.\r\n
+comment8.text=\r\n\ A\ deer\ can\ breed\ every\ x\ turns,\ where\ x\ \=\ REPRODUCTION_CYCLE.\r\n
 numComments=9

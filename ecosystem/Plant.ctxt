@@ -1,11 +1,11 @@
 #BlueJ class context
 comment0.target=Plant
 comment0.text=\r\n\ A\ class\ representing\ shared\ characteristics\ of\ plants.\r\n\ \r\n\ @author\ Rebecca\ McCranie\r\n\ \ \ \ \ \ \ \ \ (adapted\ from\ Foxes\ and\ Rabbits\ \r\n\ \ \ \ \ \ \ \ \ by\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling,\ 2016.02.29\ (2))\r\n\ @version\ 2020.04.01\r\n
-comment1.params=alive\ field\ location
-comment1.target=Plant(boolean,\ Field,\ Location)
+comment1.params=field\ location
+comment1.target=Plant(Field,\ Location)
 comment1.text=\r\n\ Create\ a\ new\ plant\ at\ location\ in\ field.\r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
-comment2.params=plant\ location
-comment2.target=java.util.ArrayList\ setLocation(Plant,\ Location)
+comment2.params=location
+comment2.target=java.util.ArrayList\ setLocation(Location)
 comment2.text=\r\n\ Add\ a\ plant\ into\ the\ List\ for\ plants\ at\ the\ location.\r\n\ \r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment3.params=newPlants
 comment3.target=void\ act(java.util.List)

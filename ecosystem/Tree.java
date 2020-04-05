@@ -35,12 +35,16 @@ public class Tree extends Plant
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Tree(boolean alive, Field field, Location location)
+    public Tree(boolean randomAge, Field field, Location location)
     {
-        super(alive, field, location);
+        super(field, location);
         age = 0;
+        if(randomAge) {
+            age = rand.nextInt();
+        }
     }
     
+      
     /**
      * Trees spread to an adjacent square every 5 turns,
      * as long as it is alive. Squares can contain up to 10 plants.
@@ -51,17 +55,43 @@ public class Tree extends Plant
      */
     public void act(List<Plant> newTrees)
     {
+        incrementAge();
         Location newLocation = getField().locationsWithSpaceForTrees(getLocation());
         
         if(isAlive() && canSpread() && newLocation != null) {
             spread(newTrees);   
-            Tree newTree = new Tree(true, getField(),newLocation);
-            setLocation(newTree, newLocation);
+            Tree newTree = new Tree(false, getField(),newLocation);
+            setLocation(newLocation);
         }
         else {
             // Overcrowding.
             setDead();
         }
+    }
+    
+    /**
+     * Add a tree into the List for plants at the location.
+     * 
+     * @param location The location within the field.
+     */
+    public ArrayList<Plant> setLocation(Location location)
+    {
+        ArrayList<Plant> plantsCurrantLocation = location.getPlants();
+        Plant plant = new Tree(false, getField(), location);
+        if(plantsCurrantLocation.size() < 10) {
+            plantsCurrantLocation.add(plant);
+        } else if(plantsCurrantLocation.size() == 10) {
+            for(Plant currantPlant : plantsCurrantLocation) {
+                if(currantPlant instanceof Grass) {
+                    plantsCurrantLocation.remove(currantPlant);
+                    plantsCurrantLocation.add(plant);
+                    break;
+                }
+            }    
+        } else {
+            setDead();
+        }
+        return plantsCurrantLocation;
     }
     
     /**

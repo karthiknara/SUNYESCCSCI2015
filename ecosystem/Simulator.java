@@ -21,7 +21,7 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 12;
     // The probability that a deer will be created in any given grid position.
-    private static final double DEER_CREATION_PROBABILITY = 0.25;
+    private static final double DEER_CREATION_PROBABILITY = 0.15;
     // The probability that a tree will be created in any given grid position.
     private static final double TREE_CREATION_PROBABILITY = 0.50; 
     // The probability that grass will be created in any given grid position.
@@ -30,7 +30,7 @@ public class Simulator
     // List of animals in the field.
     private ArrayList<Animal> animals;
     // List of plants in the field.
-    private ArrayList<ArrayList> plants;
+    private ArrayList<Plant> plants;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -109,28 +109,25 @@ public class Simulator
         List<Animal> newAnimals = new ArrayList<>();
         List<Plant> newPlants = new ArrayList<>();
         // Let all animals act.
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
+        /**for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act(newAnimals);
             if(! animal.isAlive()) {
                 it.remove();
             }
         }
-        
-        for(Iterator<ArrayList> it = plants.iterator(); it.hasNext(); ) {
-            ArrayList<Plant> plantsInSquare = it.next();
-            for(Plant plant : plantsInSquare) {
-                plant.act(newPlants);
-                if(! plant.isAlive()) {
-                    plantsInSquare.remove(plant);
-                }
-            } 
-            plantsInSquare.addAll(newPlants);
+        */
+        for(Iterator<Plant> it = plants.iterator(); it.hasNext(); ) {
+            Plant plant = it.next();
+            plant.act(newPlants);
+            if(! plant.isAlive()) {
+                it.remove();
+            }
         }
                         
         // Add the newly born deer and new plants to the main lists.
         animals.addAll(newAnimals);
-        
+        plants.addAll(newPlants);
 
         view.showStatus(step, field);
     }
@@ -164,15 +161,23 @@ public class Simulator
                     Deer deer = new Deer(true, field, location);
                     animals.add(deer);
                 }
-                else if(rand.nextDouble() <= TREE_CREATION_PROBABILITY) {
+            }
+        }
+        for(int row = 0; row < field.getDepth(); row++) {
+            for(int col = 0; col < field.getWidth(); col++) {
+                if(rand.nextDouble() <= TREE_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Tree tree = new Tree(true, field, location);
-                    location.addPlant(tree);
+                    plants.add(tree);
                 }
-                else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
+            }
+        }
+        for(int row = 0; row < field.getDepth(); row++) {
+            for(int col = 0; col < field.getWidth(); col++) {
+                if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Grass grass = new Grass(true, field, location);
-                    location.addPlant(grass);
+                    plants.add(grass);
                     // else leave the location empty.
             }
         }

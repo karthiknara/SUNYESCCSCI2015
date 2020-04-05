@@ -40,11 +40,17 @@ public class Deer extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Deer(boolean alive, Field field, Location location)
+    public Deer(boolean randomAge, Field field, Location location)
     {
-        super(alive, field, location);
-        healthLevel = 8;
-        age = 0;
+        super(field, location);
+        if(randomAge) {
+            age = rand.nextInt();
+            healthLevel = rand.nextInt(MAX_HEALTH);
+        }
+        else {
+            healthLevel = 8;
+            age = 0;
+        }
     }
         
     /**
@@ -56,12 +62,13 @@ public class Deer extends Animal
      */
     public void act(List<Animal> newDeers)
     {
-        incrementAge();
-        lowerHealth();
-        if(isAlive()) {
+        
+        if(isAlive() && healthLevel == MAX_HEALTH) {
             giveBirth(newDeers);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
+            incrementAge();
+            lowerHealth();
             if(newLocation == null) { 
                 // No food found - try to move to a free location.
                 newLocation = getField().freeAdjacentLocation(getLocation());
@@ -111,14 +118,16 @@ public class Deer extends Animal
             Object plant = field.getObjectAt(where);
             if(plant instanceof Grass) {
                 Grass grass = (Grass) plant;
-                if(grass.isAlive() && healthLevel <= MAX_HEALTH) { 
-                    healthLevel = healthLevel + GRASS_FOOD_VALUE;
-                }
-                grass.setDead();
-                return where;
+                if(grass.isAlive()) { 
+                    grass.setDead();
+                    if(healthLevel < MAX_HEALTH) {
+                        healthLevel = healthLevel + GRASS_FOOD_VALUE;
+                    }
+                    return where;
                 }
             }
-            return null;
+        }
+        return null;
     }
     
     /**
@@ -135,7 +144,7 @@ public class Deer extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Deer young = new Deer(true, field, loc);
+            Deer young = new Deer(false, field, loc);
             newDeers.add(young);
         }
     }
@@ -155,7 +164,7 @@ public class Deer extends Animal
     }
 
     /**
-     * A deer can breed if it has reached the breeding age.
+     * A deer can breed every x turns, where x = REPRODUCTION_CYCLE.
      */
     private boolean canBreed()
     {

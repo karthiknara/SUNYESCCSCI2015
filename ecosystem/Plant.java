@@ -19,6 +19,8 @@ public abstract class Plant
     private Location location;
     //The max number of plants that can be on any particular square
     private static final int MAX_PLANTS = 10;
+    
+    
    
     /**
      * Create a new plant at location in field.
@@ -26,11 +28,11 @@ public abstract class Plant
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Plant(boolean alive, Field field, Location location)
+    public Plant(Field field, Location location)
     {
-        alive = true;
         this.field = field;
         this.location = location;
+        alive = true;
     }
     
     /**
@@ -38,18 +40,8 @@ public abstract class Plant
      * 
      * @param location The location within the field.
      */
-    public ArrayList<Plant> setLocation(Plant plant, Location location)
-    {
-        ArrayList<Plant> plantsCurrantLocation = location.getPlants();
-        if(plantsCurrantLocation.size() < 10) {
-            plantsCurrantLocation.add(plant);
-        } else if(plantsCurrantLocation.size() == 10 && plant instanceof Tree){
-            field.replaceGrass(location);
-        } else {
-            setDead();
-        }
-        return plantsCurrantLocation;
-    }
+    abstract public ArrayList<Plant> setLocation(Location location);
+    
     
     /**
      * Make this plant act - that is: make it do
@@ -102,5 +94,6 @@ public abstract class Plant
     {
         return field;
     }
+    
     
 }
