@@ -15,7 +15,6 @@ public class Grass extends Plant
     public Grass(Field field, Location location)
     {
         super(field, location);
-        setBreedingProbability(0.12);
     }
 
     

@@ -14,7 +14,7 @@ public abstract class Entity
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     // The likelihood of an entity breeding.
-    private static double BREEDING_PROBABILITY = 0;
+    private double breedingProbability = 1;
     
     // Whether the entity is alive or not.
     private boolean alive;
@@ -126,7 +126,7 @@ public abstract class Entity
      */
     protected double getBreedingProbability()
     {
-        return BREEDING_PROBABILITY;
+        return breedingProbability;
     }
     
     /**
@@ -144,6 +144,6 @@ public abstract class Entity
      */
     protected double setBreedingProbability(double prob)
     {
-        return BREEDING_PROBABILITY = prob;
+        return breedingProbability = prob;
     }
 }

@@ -24,7 +24,6 @@ public class Plant extends Entity
     public Plant(Field field, Location location)
     {
         super(field, location);
-        setBreedingProbability(0.12);
     }
     
     /**
