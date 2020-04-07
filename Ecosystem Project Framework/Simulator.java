@@ -25,9 +25,9 @@ public class Simulator
     // The default .
     private static final int DEFAULT_TREE = 10;
     // The probability that a fox will be created in any given grid position. ????????????????
-    private static final double DEER_CREATION_PROBABILITY = 100;
+    private static final double DEER_CREATION_PROBABILITY = .02;
     // The probability that a rabbit will be created in any given grid position. ??????????????
-    private static final double GRASS_CREATION_PROBABILITY = 100;    
+    private static final double GRASS_CREATION_PROBABILITY = .08;    
 
     // List of animals in the field.
     private List<Entity> entities;
@@ -78,7 +78,7 @@ public class Simulator
             grassCount = DEFAULT_GRASS;
             treeCount = DEFAULT_TREE;
         }
-        else if(grass < deer || deer < tree) {
+        else if(grass < deer && deer < tree) {
             System.out.println("The number of deers must be less than grass and greater than the number of trees.");
             System.out.println("Using default values.");
             deerCount = DEFAULT_DEER;
@@ -186,7 +186,7 @@ public class Simulator
     /**
      * Randomly populate the field with foxes and rabbits.
      */
-    private void populate()
+    private void test1populate()
     {
         int deerSpawned = 0;
         int grassSpawned = 0;
@@ -217,6 +217,95 @@ public class Simulator
             }
         }
         
+    }
+    
+    /**
+     * Randomly populate the field with foxes and rabbits.
+     */
+    private void test2populate()
+    {
+        int deerSpawned = 0;
+        int grassSpawned = 0;
+        boolean deerBirthed = false;
+        boolean grassBirthed = false;
+        Random rand = Randomizer.getRandom();
+        field.clear();
+        while(deerSpawned < deerCount && grassSpawned < grassCount){
+            for(int row = 0; row < field.getDepth(); row++) {
+                for(int col = 0; col < field.getWidth(); col++) {
+                // Allows only a set number of deer to spawn.
+                
+                
+                
+                    if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
+                        Location location = new Location(row, col);
+                        Deer deer = new Deer(true, field, location);
+                        entities.add(deer);
+                        deerSpawned++;
+                    }
+                    // else leave the location empty.
+                
+                // Allows only a set number of grass to spawn.
+                    if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
+                        Location location = new Location(row, col);
+                        Plant plant = new Plant(field, location);
+                        entities.add(plant);
+                        grassSpawned++;
+                    }
+                    
+                    // else leave the location empty.
+                
+                }
+            }
+             
+        
+        }
+    }
+
+    /**
+     * Randomly populate the field with foxes and rabbits.
+     */
+    private void populate()
+    {
+        int deerSpawned = 0;
+        int grassSpawned = 0;
+        boolean deerBirthed = false;
+        boolean grassBirthed = false;
+        Random rand = Randomizer.getRandom();
+        field.clear();
+        while(deerSpawned < deerCount){
+            for(int row = 0; row < field.getDepth(); row++) {
+                for(int col = 0; col < field.getWidth(); col++) {
+                // Allows only a set number of deer to spawn.
+                
+                
+                
+                    if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
+                        Location location = new Location(row, col);
+                        Deer deer = new Deer(true, field, location);
+                        entities.add(deer);
+                        deerSpawned++;
+                    }
+                    // else leave the location empty.
+                
+                }
+            }
+        }
+             
+        while(grassSpawned < grassCount){
+            for(int row = 0; row < field.getDepth(); row++) {
+            for(int col = 0; col < field.getWidth(); col++) {
+                if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
+                        Location location = new Location(row, col);
+                        Plant plant = new Plant(field, location);
+                        entities.add(plant);
+                        grassSpawned++;
+                    }
+                }
+            }
+         } 
+            
+    
     }
     
     /**

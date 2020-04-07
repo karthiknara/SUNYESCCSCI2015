@@ -57,14 +57,15 @@ public class Plant extends Entity
     {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
-        canBreed();
-        Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Plant newPlant = new Plant(field, loc);
-            newPlants.add(newPlant);
+        if (canBreed()){
+            Field field = getField();
+            List<Location> free = field.getFreeAdjacentLocations(getLocation());
+            int births = breed();
+            for(int b = 0; b < births && free.size() > 0; b++) {
+                Location loc = free.remove(0);
+                Plant newPlant = new Plant(field, loc);
+                newPlants.add(newPlant);
+            }
         }
     }
   

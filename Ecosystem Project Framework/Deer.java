@@ -147,14 +147,15 @@ public class Deer extends Entity
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
-        canBreed();
-        Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Deer young = new Deer(false, field, loc);
-            newDeers.add(young);
+        if(canBreed()){
+            Field field = getField();
+            List<Location> free = field.getFreeAdjacentLocations(getLocation());
+            int births = breed();
+            for(int b = 0; b < births && free.size() > 0; b++) {
+                Location loc = free.remove(0);
+                Deer young = new Deer(false, field, loc);
+                newDeers.add(young);
+            }
         }
     }
 
