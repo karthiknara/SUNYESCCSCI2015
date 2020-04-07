@@ -31,7 +31,7 @@ public class Deer extends Entity
     
     // Individual characteristics (instance fields).
     // The fox's age.
-    private int age;
+    
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
     // The deer's HP level, which is increased by eating grass
@@ -45,19 +45,12 @@ public class Deer extends Entity
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Deer(boolean randomAge, Field field, Location location)
+    public Deer(Field field, Location location)
     {
         super(field, location);
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(GRASS_FOOD_VALUE);
-            hp = MAX_HP;
-        }
-        else {
-            age = 0;
-            foodLevel = GRASS_FOOD_VALUE;
-            hp = MAX_HP;
-        }
+        foodLevel = GRASS_FOOD_VALUE;
+        hp = MAX_HP;
+        
     }
     
     /**
@@ -69,15 +62,15 @@ public class Deer extends Entity
      */
     public void act(List<Entity> newDeers)
     {
-        incrementAge();
-        incrementHunger();
-        if(isAlive()) {
+        incrementTurnCount();
+            if(isAlive()) {
             giveBirth(newDeers);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
                 // No food found - try to move to a free location.
                 newLocation = getField().freeAdjacentLocation(getLocation());
+                incrementHunger();
             }
             // See if it was possible to move.
             if(newLocation != null) {
@@ -88,17 +81,7 @@ public class Deer extends Entity
                 setDead();
             }
         }
-    }
-
-    /**
-     * Increase the age. This could result in the fox's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
+        
     }
     
     /**
@@ -147,13 +130,13 @@ public class Deer extends Entity
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
-        if(canBreed()){
+        if(!canBreed()){
             Field field = getField();
             List<Location> free = field.getFreeAdjacentLocations(getLocation());
             int births = breed();
             for(int b = 0; b < births && free.size() > 0; b++) {
                 Location loc = free.remove(0);
-                Deer young = new Deer(false, field, loc);
+                Deer young = new Deer(field, loc);
                 newDeers.add(young);
             }
         }

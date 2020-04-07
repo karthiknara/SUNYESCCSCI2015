@@ -35,6 +35,7 @@ public class Plant extends Entity
     public void act(List<Entity> newPlants)
     {
         if(isAlive()) {
+            incrementTurnCount();
             giveBirth(newPlants);            
             // Try to move into a free location.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
@@ -57,7 +58,7 @@ public class Plant extends Entity
     {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
-        if (canBreed()){
+        if (!canBreed()){
             Field field = getField();
             List<Location> free = field.getFreeAdjacentLocations(getLocation());
             int births = breed();

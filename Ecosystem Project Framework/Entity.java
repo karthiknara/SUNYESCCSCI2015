@@ -23,7 +23,7 @@ public abstract class Entity
     // The entity's position in the field.
     private Location location;
     //The number of turns this entity has been alive.
-    private int turnCount;
+    private int turn;
     
     /**
      * Create a new entity at location in field.
@@ -36,7 +36,7 @@ public abstract class Entity
         alive = true;
         this.field = field;
         setLocation(location);
-        turnCount = 0;
+        turn = 0;
     }
     
     /**
@@ -147,8 +147,16 @@ public abstract class Entity
      */
     protected int getTurnCount()
     {
-        return turnCount;
+        return turn;
     }    
 
+    /**
+     * Return the entity's number of turns alive.
+     * @return The entity's turnCount field.
+     */
+    protected void incrementTurnCount()
+    {
+        turn++;
+    }    
     
 }

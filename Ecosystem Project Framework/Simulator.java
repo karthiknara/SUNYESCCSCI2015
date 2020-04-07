@@ -170,7 +170,7 @@ public class Simulator
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Deer deer = new Deer(true, field, location);
+                    Deer deer = new Deer(field, location);
                     entities.add(deer);
                 }
                 else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
@@ -198,7 +198,7 @@ public class Simulator
                 while(deerSpawned < deerCount){
                     if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
                         Location location = new Location(row, col);
-                        Deer deer = new Deer(true, field, location);
+                        Deer deer = new Deer(field, location);
                         entities.add(deer);
                         deerSpawned++;
                     }
@@ -239,7 +239,7 @@ public class Simulator
                 
                     if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
                         Location location = new Location(row, col);
-                        Deer deer = new Deer(true, field, location);
+                        Deer deer = new Deer(field, location);
                         entities.add(deer);
                         deerSpawned++;
                     }
@@ -282,7 +282,7 @@ public class Simulator
                 
                     if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
                         Location location = new Location(row, col);
-                        Deer deer = new Deer(true, field, location);
+                        Deer deer = new Deer(field, location);
                         entities.add(deer);
                         deerSpawned++;
                     }
