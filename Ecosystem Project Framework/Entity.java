@@ -14,7 +14,7 @@ public abstract class Entity
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     // The likelihood of an entity breeding.
-    private double breedingProbability = 1;
+    private static final double breedingProbability = 1;
     
     // Whether the entity is alive or not.
     private boolean alive;
@@ -22,6 +22,8 @@ public abstract class Entity
     private Field field;
     // The entity's position in the field.
     private Location location;
+    //The number of turns this entity has been alive.
+    private int turnCount;
     
     /**
      * Create a new entity at location in field.
@@ -34,6 +36,7 @@ public abstract class Entity
         alive = true;
         this.field = field;
         setLocation(location);
+        turnCount = 0;
     }
     
     /**
@@ -139,11 +142,13 @@ public abstract class Entity
     }
     
     /**
-     * Return the entity's max number of offspring.
-     * @return The entity's max number of offspring.
+     * Return the entity's number of turns alive.
+     * @return The entity's turnCount field.
      */
-    protected double setBreedingProbability(double prob)
+    protected int getTurnCount()
     {
-        return breedingProbability = prob;
-    }
+        return turnCount;
+    }    
+
+    
 }

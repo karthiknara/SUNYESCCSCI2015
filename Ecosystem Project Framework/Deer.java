@@ -15,13 +15,15 @@ public class Deer extends Entity
     
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 15;
+    // The age at which a fox can start to breed.
+    private static final int BREEDING_RATE = 15;
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int GRASS_FOOD_VALUE = 8;
+    private static final int GRASS_FOOD_VALUE = 1;
     // The max number of health points for a deer.
     private static final int MAX_HP = 8;
     // A shared random number generator to control breeding.
@@ -46,7 +48,6 @@ public class Deer extends Entity
     public Deer(boolean randomAge, Field field, Location location)
     {
         super(field, location);
-        setBreedingProbability(0.08);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(GRASS_FOOD_VALUE);
@@ -146,6 +147,7 @@ public class Deer extends Entity
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
+        canBreed();
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
@@ -161,10 +163,11 @@ public class Deer extends Entity
      */
     private boolean canBreed()
     {
-        if (hp < MAX_HP)
+        if (hp < MAX_HP && getTurnCount() % BREEDING_RATE == 0)
         {
             return false;
         }
         return true;
     }
+    
 }

@@ -11,13 +11,14 @@ import java.util.Random;
 public class Plant extends Entity
 {
     // Characteristics shared by all plants (class variables).
+    // How many turns must pass before grass spreads to an adjacent square.
+    private static final int NEW_GRASS = 2;
     
     // Individual characteristics (instance fields).
     /**
      * Create a new plant. A plant may be created with age
      * zero or with a random age.
      * 
-     * @param randomAge If true, the plant will have a random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -56,6 +57,7 @@ public class Plant extends Entity
     {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
+        canBreed();
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
@@ -66,4 +68,11 @@ public class Plant extends Entity
         }
     }
   
+    /**
+     * Grass can reproduce if its age is a multiple of NEW_GRASS.
+     */
+    private boolean canBreed()
+    {
+        return getTurnCount() % NEW_GRASS == 0;
+    }
 }
