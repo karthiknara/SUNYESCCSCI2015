@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Organism
+comment0.text=\r\n\ A\ class\ representing\ shared\ characteristics\ of\ organisms.\r\n\ \r\n\ @author\ Rebecca\ McCranie\r\n\ \ \ \ \ \ \ \ \ (adapted\ from\ Foxes\ and\ Rabbits\ \r\n\ \ \ \ \ \ \ \ \ by\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling,\ 2016.02.29\ (2))\r\n\ @version\ 2020.04.01\r\n
+comment1.params=field\ location
+comment1.target=Organism(Field,\ Location)
+comment1.text=\r\n\ Create\ a\ new\ organism\ at\ location\ in\ field.\r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
+comment2.params=newOrganisms
+comment2.target=void\ act(java.util.List)
+comment2.text=\r\n\ Make\ this\ organism\ act\ -\ that\ is\:\ make\ it\ do\r\n\ whatever\ it\ wants/needs\ to\ do.\r\n\ @param\ newOrganisms\ A\ list\ to\ receive\ newly\ born\ organisms.\r\n
+comment3.params=
+comment3.target=boolean\ isAlive()
+comment3.text=\r\n\ Check\ whether\ the\ organism\ is\ alive\ or\ not.\r\n\ @return\ true\ if\ the\ organism\ is\ still\ alive.\r\n
+comment4.params=
+comment4.target=void\ setDead()
+comment4.text=\r\n\ Indicate\ that\ the\ organism\ is\ no\ longer\ alive.\r\n\ It\ is\ removed\ from\ the\ field.\r\n
+comment5.params=
+comment5.target=Location\ getLocation()
+comment5.text=\r\n\ Return\ the\ organism's\ location.\r\n\ @return\ The\ organism's\ location.\r\n
+comment6.params=newLocation
+comment6.target=void\ setLocation(Location)
+comment6.text=\r\n\ Place\ the\ organism\ at\ the\ new\ location\ in\ the\ given\ field.\r\n\ @param\ newLocation\ The\ organism's\ new\ location.\r\n
+comment7.params=
+comment7.target=Field\ getField()
+comment7.text=\r\n\ Return\ the\ organism's\ field.\r\n\ @return\ The\ organism's\ field.\r\n
+numComments=8
