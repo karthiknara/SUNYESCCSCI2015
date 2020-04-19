@@ -28,7 +28,12 @@ public class Simulator
     private static final double GRASS_CREATION_PROBABILITY = 0.15;
     // The number of turns before a fire starts.
     private static final int FIRE_STARTS = 10;
-    
+    // The default number of deer to start the simulation.
+    private static final int DEFAULT_DEER = 10;
+    // The default number of grass plants to start the simulation.
+    private static final int DEFAULT_GRASS = 20;
+    // The default number of trees to start the simulation.
+    private static final int DEFAULT_TREE = 5;
 
     // List of living organisms in the field.
     private ArrayList<Thing> things;
@@ -38,15 +43,19 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    // List of fires in the field.
-    
+    // The number of deer at beginning of simulation.
+    private int deerCount;
+    // The number of trees at beginning of simulation.
+    private int treeCount;
+    // The number of grass plants at beginning of simulation.
+    private int grassCount;
     
     /**
      * Construct a simulation field with default size.
      */
-    public Simulator()
+    public Simulator(int deer, int grass, int trees)
     {
-        this(DEFAULT_DEPTH, DEFAULT_WIDTH);
+        this(DEFAULT_DEPTH, DEFAULT_WIDTH, deer, grass, trees);
     }
     
     /**
@@ -54,8 +63,13 @@ public class Simulator
      * @param depth Depth of the field. Must be greater than zero.
      * @param width Width of the field. Must be greater than zero.
      */
-    public Simulator(int depth, int width)
+    private Simulator(int depth, int width, int deer, int grass, int trees)
     {
+        deerCount = deer;
+        grassCount = grass;
+        treeCount = trees;
+        
+        // Check grid dimensions to be reasonable.
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
@@ -63,8 +77,24 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
         
-       things = new ArrayList<>();
-       field = new Field(depth, width);
+        // Check population numbers to be reasonable.
+        if(grass == 0 && deer == 0 && trees == 0) {
+            System.out.println("Please insert a value for each entity.");
+            System.out.println("Using default values.");
+            deerCount = DEFAULT_DEER;
+            grassCount = DEFAULT_GRASS;
+            treeCount = DEFAULT_TREE;
+        }
+        else if(grass < deer && deer < trees) {
+            System.out.println("The number of deer must be less than the number of grass plants and greater than the number of trees.");
+            System.out.println("Using default values.");
+            deerCount = DEFAULT_DEER;
+            grassCount = DEFAULT_GRASS;
+            treeCount = DEFAULT_TREE;
+        }
+        
+        things = new ArrayList<>();
+        field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
@@ -79,11 +109,11 @@ public class Simulator
     
     /**
      * Run the simulation from its current state for a reasonably long period,
-     * (40 steps).
+     * (25 steps).
      */
     public void runLongSimulation()
     {
-        simulate(40);
+        simulate(25);
     }
     
     /**
@@ -95,7 +125,7 @@ public class Simulator
     {
         for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
-            // delay(60);   // uncomment this to run more slowly
+            delay(60);   // uncomment this to run more slowly
         }
     }
     
@@ -107,9 +137,9 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-        List<Thing> fire = new ArrayList<>();
+        List<Thing> newFires = new ArrayList<>();
         if(step > 0 && step % FIRE_STARTS == 0) {
-            startFire(fire);
+            startFire(newFires);
         }
         // Provide space for new organisms.
         List<Thing> newThings = new ArrayList<>();
@@ -125,12 +155,12 @@ public class Simulator
                                 
         // Add the newly born deer and new plants to the main lists.
         things.addAll(newThings);
-        things.addAll(fire);
+        things.addAll(newFires);
         
         view.showStatus(step, field);
     }
     
-        /**
+    /**
      * If no fire is already burning, start a fire in the field.
      */
     private void startFire(List<Thing> fire)
@@ -170,30 +200,49 @@ public class Simulator
     {
         Random rand = Randomizer.getRandom();
         field.clear();
-        for(int row = 0; row < field.getDepth(); row++) {
-            for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= DEER_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Deer deer = new Deer(false, field, location);
-                    things.add(deer);
-                }
-                else if(rand.nextDouble() <= TREE_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Tree tree = new Tree(false, field, location);
-                    things.add(tree);
-                    location.addPlant(tree);
-                }
-                else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Grass grass = new Grass(false, field, location);
-                    things.add(grass);
-                    location.addPlant(grass);
-                }
-                    // else leave the location empty.
+        int deerCreated = 0;
+        int grassCreated = 0;
+        int treesCreated = 0;
+        while(deerCreated < deerCount) {
+             int row = rand.nextInt(field.getDepth());
+             int col = rand.nextInt(field.getWidth());
+             Location location = new Location(row, col);
+             Deer deer = new Deer(false, field, location);
+             things.add(deer);
+             deerCreated++;
+        }
+        while(treesCreated < treeCount) {
+            int row = rand.nextInt(field.getDepth());
+            int col = rand.nextInt(field.getWidth()); 
+            Location location = new Location(row, col);
+            Tree tree = new Tree(false, field, location);
+            ArrayList<Plant> plants = location.getPlants();
+            if(plants.size() < 10) {
+                things.add(tree);
+                location.addPlant(tree);
+                treesCreated++;
+            } 
+            else {
+                tree.setDead();
             }
         }
-        
-        
+        while(grassCreated < grassCount) {
+            int row = rand.nextInt(field.getDepth());
+            int col = rand.nextInt(field.getWidth()); 
+            Location location = new Location(row, col);
+            Grass grass = new Grass(false, field, location);
+            ArrayList<Plant> plants = location.getPlants();
+            if(plants.size() < 10) {
+                things.add(grass);
+                location.addPlant(grass); 
+                grassCreated++;
+            } 
+            else {
+                grass.setDead();
+            }
+            
+        }
+               
     }
     
     /**

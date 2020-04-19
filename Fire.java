@@ -19,6 +19,10 @@ public class Fire extends Thing
     
     // The probability that a fire will start
     private static final double FIRE_PROBABILITY = 1;
+    // The probability that a fire will kill a tree.
+    private static final double TREE_DEATH_PROBABILITY= 0.60;
+    // The probability that a fire will kill grass.
+    private static final double GRASS_DEATH_PROBABILITY = 0.75;
     
     
     
@@ -42,19 +46,23 @@ public class Fire extends Thing
      */
     public void act(List<Thing> newFire)
     {
-        Location newLocation = findFuel();
-        if(newLocation == null) {
+        if(isViable()) {
+            spread(newFire);
+            Location newLocation = findFuel();
+        
+            if(newLocation == null) {
             // No food found - try to move to a free location.
             newLocation = getField().randomAdjacentLocation(getLocation());
             }
             // See if it was possible to move.
-        if(newLocation != null) {
+            if(newLocation != null) {
              setLocation(newLocation);
             }
-        else {
+            else {
              // Overcrowding.
              setDead();
             }
+        }
     }
     
         
@@ -83,6 +91,8 @@ public class Fire extends Thing
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
+        Location currantLocation = getLocation();
+        ArrayList<Plant> plantsInSquare = currantLocation.getPlants();
         while(it.hasNext()) {
             Location where = it.next();
             ArrayList<Plant> plants = where.getPlants();
@@ -90,10 +100,10 @@ public class Fire extends Thing
                 for(Plant plant : plants) {
                     double death = 0;
                     if(plant instanceof Grass) {
-                        death = 0.75;
+                        death = GRASS_DEATH_PROBABILITY;
                     }
                     else if(plant instanceof Tree) {
-                        death = 0.60;
+                        death = TREE_DEATH_PROBABILITY;
                     }
                 
                     if(rand.nextDouble() <= death) {
@@ -105,7 +115,24 @@ public class Fire extends Thing
         }
         return null;
     }
-    
+    /**
+     * Fire will spread to any square with plants on it. 
+     * Each plant has a probability of dying by fire.
+     */
+    private void spread(List<Thing> newFire)
+    {
+      
+      Field field = getField();
+      List<Location> adjacent = field.adjacentLocations(getLocation());
+      for(Location location : adjacent) {
+          ArrayList<Plant> adjacentPlantList = location.getPlants();
+          if(adjacentPlantList.size() > 0) {
+              Fire fire = new Fire(field, location);
+              newFire.add(fire);
+            }
+      }
+      
+    }
     
        
     /**

@@ -114,18 +114,25 @@ public class Deer extends Animal
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
+        Location mostFood = getLocation();
+        ArrayList<Plant> currantPlantList = mostFood.getPlants();
         while(it.hasNext()) {
             Location where = it.next();
             ArrayList<Plant> plants = where.getPlants();
-            if(plants.size() > 0) {
-                Plant food = plants.get(0);
-                food.setDead();
-                    if(healthLevel < MAX_HEALTH) {
-                        healthLevel = healthLevel + GRASS_FOOD_VALUE;
-                    }
-                return where;
-                }         
+            if(plants.size() > currantPlantList.size()) {
+                mostFood = where;
             }
+        }
+        currantPlantList = mostFood.getPlants();
+        if(currantPlantList.size() > 0) {
+            Plant food = currantPlantList.get(0);
+            food.setDead();
+            currantPlantList.remove(0);
+            if(healthLevel < MAX_HEALTH) {
+                healthLevel = healthLevel + GRASS_FOOD_VALUE;
+            }        
+            return mostFood;
+        }
         return null;
     }
     
