@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Tree
+comment0.text=\r\n\ A\ simple\ model\ of\ a\ tree.\r\n\ Trees\ age,\ reproduce,\ and\ have\ a\ 60%\ chance\ of\ dying\ if\ they\r\n\ encounter\ fire.\r\n\ \r\n\ @author\ Rebecca\ McCranie\r\n\ \ \ \ \ \ \ \ \ (adapted\ from\ Foxes\ and\ Rabbits\ \r\n\ \ \ \ \ \ \ \ \ by\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling,\ 2016.02.29\ (2))\r\n\ @version\ 2020.04.01\r\n
+comment1.params=randomAge\ field\ location
+comment1.target=Tree(boolean,\ Field,\ Location)
+comment1.text=\r\n\ Create\ a\ tree.\ \r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
+comment2.params=newTrees
+comment2.target=void\ act(java.util.List)
+comment2.text=\r\n\ Trees\ spread\ to\ an\ adjacent\ square\ every\ 5\ turns,\r\n\ as\ long\ as\ it\ is\ alive.\ Squares\ can\ contain\ up\ to\ 10\ plants.\r\n\ Trees\ can\ replace\ grass\ plants.\r\n\ (based\ on\ the\ findFood\ method\ for\ the\ Fox\ class)\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ newPlants\ A\ list\ to\ return\ newly\ born\ plants.\r\n
+comment3.params=
+comment3.target=boolean\ canSpread()
+comment3.text=\r\n\ A\ tree\ can\ reproduce\ if\ its\ age\ is\ a\ multiple\ of\ NEW_TREE.\r\n
+comment4.params=
+comment4.target=void\ incrementAge()
+comment4.text=\r\n\ Increase\ the\ age.\ This\ is\ only\ used\ to\ determine\ when\ a\ tree\r\n\ can\ reproduce.\ Trees\ do\ not\ die\ of\ old\ age.\r\n
+comment5.params=newPlants
+comment5.target=void\ spread(java.util.List)
+comment5.text=\r\n\ New\ trees\ will\ grow\ in\ adjacent\ locations\ with\ enough\ space.\r\n\ @param\ newTrees\ A\ list\ to\ return\ new\ trees.\r\n
+numComments=6
