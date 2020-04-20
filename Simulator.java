@@ -65,10 +65,7 @@ public class Simulator
      */
     private Simulator(int depth, int width, int deer, int grass, int trees)
     {
-        deerCount = deer;
-        grassCount = grass;
-        treeCount = trees;
-        
+  
         // Check grid dimensions to be reasonable.
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
@@ -77,15 +74,21 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
         
+        if (grass > 0 && deer > 0 && trees > 0 && grass > deer && deer > trees) {
+        deerCount = deer;
+        grassCount = grass;
+        treeCount = trees;
+        }
+        
         // Check population numbers to be reasonable.
-        if(grass == 0 && deer == 0 && trees == 0) {
+       else if(grass == 0 || deer == 0 || trees == 0) {
             System.out.println("Please insert a value for each entity.");
             System.out.println("Using default values.");
             deerCount = DEFAULT_DEER;
             grassCount = DEFAULT_GRASS;
             treeCount = DEFAULT_TREE;
         }
-        else if(grass < deer && deer < trees) {
+        else if(grass < deer || deer < trees) {
             System.out.println("The number of deer must be less than the number of grass plants and greater than the number of trees.");
             System.out.println("Using default values.");
             deerCount = DEFAULT_DEER;
