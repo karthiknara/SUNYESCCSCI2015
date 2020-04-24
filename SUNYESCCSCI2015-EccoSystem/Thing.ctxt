@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Thing
+comment0.text=\r\n\ A\ class\ representing\ shared\ characteristics\ of\ things\ in\ the\ field.\r\n\ \r\n\r\n
+comment1.params=field\ location
+comment1.target=Thing(Field,\ Location)
+comment1.text=\r\n\ Create\ a\ new\ thing\ at\ location\ in\ field.\r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
+comment2.params=newThings
+comment2.target=void\ act(java.util.List)
+comment2.text=\r\n\ Make\ this\ thing\ act\ -\ that\ is\:\ make\ it\ do\r\n\ whatever\ it\ wants/needs\ to\ do.\r\n\ \r\n
+comment3.params=
+comment3.target=boolean\ isViable()
+comment3.text=\r\n\ Check\ whether\ the\ thing\ is\ viable\ or\ not.\r\n\ @return\ true\ if\ the\ thing\ is\ still\ viable.\r\n
+comment4.params=
+comment4.target=void\ setDead()
+comment4.text=\r\n\ Indicate\ that\ the\ thing\ is\ no\ longer\ viable.\r\n\ It\ is\ removed\ from\ the\ field.\r\n
+comment5.params=
+comment5.target=Location\ getLocation()
+comment5.text=\r\n\ Return\ the\ thing's\ location.\r\n\ @return\ The\ thing's\ location.\r\n
+comment6.params=newLocation
+comment6.target=void\ setLocation(Location)
+comment6.text=\r\n\ Place\ the\ organism\ at\ the\ new\ location\ in\ the\ given\ field.\r\n\ @param\ newLocation\ The\ organism's\ new\ location.\r\n
+comment7.params=
+comment7.target=Field\ getField()
+comment7.text=\r\n\ Return\ the\ thing's\ field.\r\n\ @return\ The\ thing's\ field.\r\n
+numComments=8

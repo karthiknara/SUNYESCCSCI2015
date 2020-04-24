@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Organism
+comment0.text=\r\n\ \r\n
+comment1.params=field\ location
+comment1.target=Organism(Field,\ Location)
+comment1.text=\r\n\ Create\ a\ new\ thing\ at\ location\ in\ field.\r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
+comment2.params=newThings
+comment2.target=void\ act(java.util.List)
+comment2.text=\r\n\ Make\ this\ organism\ act\ -\ that\ is\:\ make\ it\ do\r\n\ whatever\ it\ wants/needs\ to\ do.\r\n\ @param\ newOrganisms\ A\ list\ to\ receive\ newly\ born\ organisms.\r\n
+comment3.params=
+comment3.target=void\ setDead()
+comment3.text=\r\n\ Indicate\ that\ the\ organism\ is\ no\ longer\ alive.\r\n\ It\ is\ removed\ from\ the\ field.\r\n
+numComments=4

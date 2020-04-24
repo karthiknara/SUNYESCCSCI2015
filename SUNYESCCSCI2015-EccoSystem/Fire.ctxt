@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Fire
+comment0.text=\r\n\ A\ simple\ model\ of\ fire.\r\n\ Fire\ starts,\ moves,\ kills\ grass\ and\ trees,\ and\ burns\ out.\r\n\ \r\n\ \r\n\ \r\n
+comment1.params=field\ location
+comment1.target=Fire(Field,\ Location)
+comment1.text=\r\n\ Create\ fire.\ \r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
+comment2.params=newFire
+comment2.target=void\ act(java.util.List)
+comment2.text=\r\n\ This\ is\ what\ fire\ does\ most\ of\ the\ time\:\ it\ looks\ for\r\n\ grass\ or\ trees\ to\ burn.\r\n\ \r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ newDeers\ A\ list\ to\ return\ newly\ born\ deer.\r\n
+comment3.params=
+comment3.target=void\ startFire()
+comment3.text=\r\n\ If\ no\ fire\ is\ already\ burning,\ start\ a\ fire\ in\ the\ field.\r\n
+comment4.params=
+comment4.target=Location\ findFuel()
+comment4.text=\r\n\ Look\ for\ plants\ adjacent\ to\ the\ current\ location.\r\n\ Plants\ have\ a\ chance\ of\ dying\ by\ fire\ based\ on\ type.\r\n\ @return\ Where\ fuel\ was\ found,\ or\ null\ if\ it\ wasn't.\r\n
+comment5.params=newFire
+comment5.target=void\ spread(java.util.List)
+comment5.text=\r\n\ Fire\ will\ spread\ to\ any\ square\ with\ plants\ on\ it.\ \r\n\ Each\ plant\ has\ a\ probability\ of\ dying\ by\ fire.\r\n
+comment6.params=
+comment6.target=void\ setDead()
+comment6.text=\r\n\ If\ fire\ runs\ out\ of\ fuel,\ it\ dies.\r\n
+numComments=7
